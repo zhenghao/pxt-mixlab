@@ -50,7 +50,7 @@ function getDocsLanguageItem(editor: DocsMenuEditorName, parent: pxt.editor.IPro
     return <DocsMenuItem key={"docsmenu" + path} role="menuitem" ariaLabel={pxt.Util.rlf(editor)} text={pxt.Util.rlf(editor)} className={`ui ${cls}`} parent={parent} path={path} onItemClick={openDocs} />
 }
 
-type DocsMenuEditorName = "Blocks" | "JavaScript" | "Python";
+type DocsMenuEditorName = "Blocks" | "JavaScript" | "Python" | "TileCode";
 interface DocsMenuProps extends ISettingsProps {
     editor: DocsMenuEditorName;
 }
@@ -365,6 +365,26 @@ class PythonMenuItem extends data.Component<ISettingsProps, {}> {
     }
 }
 
+class TileCodeMenuItem extends data.Component<ISettingsProps, {}> {
+    constructor(props: ISettingsProps) {
+        super(props);
+    }
+
+    protected onClick = (): void => {
+        pxt.tickEvent("menu.tilecode", undefined, { interactiveConsent: true });
+        this.props.parent.openTileCode();
+    }
+
+    protected isActive = (): boolean => {
+        return this.props.parent.isTileCodeActive();
+    }
+
+    renderCore() {
+        return <BaseMenuItemProps className="tilecode-menuitem" icon="xicon tilecode" text="TileCode" title={lf("TileCode")} onClick={this.onClick} isActive={this.isActive} parent={this.props.parent} />
+    }
+}
+
+
 class BlocksMenuItem extends data.Component<ISettingsProps, {}> {
     constructor(props: ISettingsProps) {
         super(props);
@@ -442,9 +462,11 @@ export class EditorSelector extends data.Component<IEditorSelectorProps, {}> {
         const dropdownActive = python && (parent.isJavaScriptActive() || parent.isPythonActive());
         const tsOnly = languageRestriction === pxt.editor.LanguageRestriction.JavaScriptOnly;
         const pyOnly = languageRestriction === pxt.editor.LanguageRestriction.PythonOnly;
+        const tcOnly = languageRestriction === pxt.editor.LanguageRestriction.TileCodeOnly;
 
         // show python in toggle if: python editor currently active, or blocks editor active & saved language pref is python
         const showPython = python && !tsOnly && (parent.isPythonActive() || pxt.shell.isPyLangPref());
+        const showTileCode = tcOnly && (parent.isTileCodeActive());
         const showBlocks = !pyOnly && !tsOnly && !!pkg.mainEditorPkg().files["main.blocks"];
         const showSandbox = sandbox && !headless;
         const showDropdown = !pyOnly && !tsOnly && python;
@@ -454,6 +476,7 @@ export class EditorSelector extends data.Component<IEditorSelectorProps, {}> {
             <div id="editortoggle" className={`ui grid padded ${(pyOnly || tsOnly) ? "one-language" : ""}`}>
                 {showSandbox && <SandboxMenuItem parent={parent} />}
                 {showBlocks && <BlocksMenuItem parent={parent} />}
+                {showTileCode && <TileCodeMenuItem parent={parent} />}
                 {showPython ? <PythonMenuItem parent={parent} /> : <JavascriptMenuItem parent={parent} />}
                 {showDropdown && <sui.DropdownMenu id="editordropdown" role="menuitem" icon="chevron down" rightIcon title={lf("Select code editor language")} className={`item button attached right ${dropdownActive ? "active" : ""}`}>
                     <JavascriptMenuItem parent={parent} />
@@ -566,9 +589,13 @@ export class MainMenu extends data.Component<ISettingsProps, {}> {
         const showAssets = !!pkg.mainEditorPkg().files[pxt.ASSETS_FILE];
         const tsOnly = !inAltEditor && !showAssets && languageRestriction === pxt.editor.LanguageRestriction.JavaScriptOnly;
         const pyOnly = !inAltEditor && !showAssets && languageRestriction === pxt.editor.LanguageRestriction.PythonOnly;
+        const tcOnly = !inAltEditor && !showAssets && languageRestriction === pxt.editor.LanguageRestriction.TileCodeOnly;
         const showToggle = !inAltEditor && !targetTheme.blocksOnly
-            && (sandbox || !(tsOnly || pyOnly)); // show if sandbox or not single language
-        const editor = this.props.parent.isPythonActive() ? "Python" : (this.props.parent.isJavaScriptActive() ? "JavaScript" : "Blocks");
+            && (sandbox || !(tsOnly || pyOnly || tcOnly)); // show if sandbox or not single language
+        const editor = 
+            this.props.parent.isTileCodeActive() ? "TileCode" :
+                this.props.parent.isPythonActive() ? "Python" : 
+                    (this.props.parent.isJavaScriptActive() ? "JavaScript" : "Blocks");
 
         /* tslint:disable:react-a11y-anchors */
         return <div id="mainmenu" className={`ui borderless fixed ${targetTheme.invertedMenu ? `inverted` : ''} menu`} role="menubar" aria-label={lf("Main menu")}>

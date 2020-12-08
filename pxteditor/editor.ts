@@ -187,6 +187,7 @@ namespace pxt.editor {
         openBlocks(): void;
         openJavaScript(giveFocusOnLoading?: boolean): void;
         openPython(giveFocusOnLoading?: boolean): void;
+        openTileCode(giveFocusOnLoading?: boolean): void;
         openAssets(): void;
         openSettings(): void;
         openSimView(): void;
@@ -197,6 +198,7 @@ namespace pxt.editor {
         switchTypeScript(): void;
         openTypeScriptAsync(): Promise<void>;
         openPythonAsync(): Promise<void>;
+        openTileCodeAsync(): Promise<void>;
         saveBlocksToTypeScriptAsync(): Promise<string>;
 
         saveFileAsync(): Promise<void>;
@@ -309,6 +311,7 @@ namespace pxt.editor {
         isBlocksActive(): boolean;
         isJavaScriptActive(): boolean;
         isPythonActive(): boolean;
+        isTileCodeActive(): boolean;
         isAssetsActive(): boolean;
 
         editor: IEditor;

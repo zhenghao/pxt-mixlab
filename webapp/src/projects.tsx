@@ -1410,6 +1410,10 @@ export class NewProjectDialog extends data.Component<ISettingsProps, NewProjectD
             {
                 value: pxt.editor.LanguageRestriction.JavaScriptOnly,
                 display: lf("{0} Only", "JavaScript")
+            },
+            {
+                value: pxt.editor.LanguageRestriction.TileCodeOnly,
+                display: lf("{0} Only", "TileCode")
             }
         ];
         const classes = this.props.parent.createModalClasses("newproject");

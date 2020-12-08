@@ -478,6 +478,7 @@ declare namespace pxt.editor {
         JavaScript = "javascript",
         Markdown = "markdown",
         Python = "python",
+        TileCode = "tilecode",
         CPP = "cpp",
         JSON = "json",
         XML = "xml",
@@ -488,6 +489,7 @@ declare namespace pxt.editor {
         Standard = "",
         PythonOnly = "python-only",
         JavaScriptOnly = "javascript-only",
+        TileCodeOnly = "tilecode-only",
         NoBlocks = "no-blocks"
     }
 }

@@ -423,6 +423,11 @@ export class ProjectView
             && this.editorFile && this.editorFile.name == "main.py";
     }
 
+    isTileCodeActive(): boolean {
+        return !this.state.embedSimView && this.editor == this.textEditor
+            && this.editorFile && this.editorFile.name == "main.tc";
+    }
+
     isAssetsActive(): boolean {
         return !this.state.embedSimView && this.editor == this.assetEditor
             && this.editorFile && this.editorFile.name == pxt.ASSETS_FILE;
@@ -537,6 +542,10 @@ export class ProjectView
         this.saveFileAsync().then(() => this.setFile(pkg.mainEditorPkg().lookupFile(`this/${pxt.ASSETS_FILE}`)));
     }
 
+    openTileCode() {
+        // TODO
+    }
+
     openSettings() {
         this.setFile(pkg.mainEditorPkg().lookupFile("this/pxt.json"));
     }
@@ -597,6 +606,12 @@ export class ProjectView
 
     openTypeScriptAsync(): Promise<void> {
         return this.saveTypeScriptAsync(true);
+    }
+
+    openTileCodeAsync(): Promise<void> {
+        const tcSrcFile = pkg.mainEditorPkg().files["main.tc"];
+        // TODO
+        return Promise.resolve();
     }
 
     openPythonAsync(): Promise<void> {
@@ -2240,6 +2255,8 @@ export class ProjectView
                 cfg.preferredEditor = pxt.JAVASCRIPT_PROJECT_NAME;
             } else if (options.languageRestriction === pxt.editor.LanguageRestriction.PythonOnly) {
                 cfg.preferredEditor = pxt.PYTHON_PROJECT_NAME;
+            } else if (options.languageRestriction === pxt.editor.LanguageRestriction.TileCodeOnly) {
+                cfg.preferredEditor = pxt.TILECODE_PROJECT_NAME;
             }
 
             cfg.languageRestriction = options.languageRestriction;
@@ -2252,6 +2269,12 @@ export class ProjectView
             && cfg.files.indexOf("main.py") < 0) {
             cfg.files.push("main.py");
             if (!files["main.py"]) files["main.py"] = "\n";
+        }
+        // ensure a main.tc is ready if this is the desired project
+        if (cfg.preferredEditor == pxt.PYTHON_PROJECT_NAME
+            && cfg.files.indexOf("main.tc") < 0) {
+            cfg.files.push("main.tc");
+            if (!files["main.tc"]) files["main.tc"] = "\n";
         }
         if (options.tutorial && options.tutorial.metadata) {
             if (options.tutorial.metadata.codeStart) {

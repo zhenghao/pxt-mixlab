@@ -25,6 +25,7 @@ export class EditorAccessibilityMenu extends data.Component<EditorAccessibilityM
 
         this.openJavaScript = this.openJavaScript.bind(this);
         this.openPython = this.openPython.bind(this);
+        this.openTileCode = this.openTileCode.bind(this);
         this.showLanguagePicker = this.showLanguagePicker.bind(this);
         this.toggleHighContrast = this.toggleHighContrast.bind(this);
         this.goHome = this.goHome.bind(this);
@@ -38,6 +39,11 @@ export class EditorAccessibilityMenu extends data.Component<EditorAccessibilityM
     openPython() {
         pxt.tickEvent("accmenu.editor.openPY", undefined, { interactiveConsent: true });
         this.props.parent.openPython();
+    }
+
+    openTileCode() {
+        pxt.tickEvent("accmenu.editor.openTC", undefined, { interactiveConsent: true });
+        this.props.parent.openTileCode();
     }
 
     showLanguagePicker() {
