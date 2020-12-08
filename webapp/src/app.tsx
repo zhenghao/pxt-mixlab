@@ -2257,7 +2257,9 @@ export class ProjectView
             } else if (options.languageRestriction === pxt.editor.LanguageRestriction.PythonOnly) {
                 cfg.preferredEditor = pxt.PYTHON_PROJECT_NAME;
             } else if (options.languageRestriction === pxt.editor.LanguageRestriction.TileCodeOnly) {
+                filesToDrop = /\.(py|ts|blocks)$/;
                 cfg.preferredEditor = pxt.TILECODE_PROJECT_NAME;
+                delete files["main.ts"];
             }
 
             cfg.languageRestriction = options.languageRestriction;
