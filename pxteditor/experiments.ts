@@ -173,6 +173,12 @@ namespace pxt.editor.experiments {
                 id: "identity",
                 name: lf("Identity"),
                 description: lf("Login with various identity providers")
+            },
+            {
+                id: "tilecode",
+                name: lf("TileCode"),
+                description: lf("Program with TileCode"),
+                feedbackUrl: "https://github.com/microsoft/tilecode/issues"
             }
         ].filter(experiment => ids.indexOf(experiment.id) > -1);
     }

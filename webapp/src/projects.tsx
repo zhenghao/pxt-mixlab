@@ -1411,7 +1411,7 @@ export class NewProjectDialog extends data.Component<ISettingsProps, NewProjectD
                 value: pxt.editor.LanguageRestriction.JavaScriptOnly,
                 display: lf("{0} Only", "JavaScript")
             },
-            tilecode && {
+            pxt.editor.experiments.isEnabled("tilecode") && tilecode && {
                 value: pxt.editor.LanguageRestriction.TileCodeOnly,
                 display: lf("{0} Only", "TileCode")
             }
