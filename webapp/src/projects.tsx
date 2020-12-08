@@ -1386,7 +1386,7 @@ export class NewProjectDialog extends data.Component<ISettingsProps, NewProjectD
 
     renderCore() {
         const { visible, name, emoji } = this.state;
-        const { python, chooseLanguageRestrictionOnNewProject } = pxt.appTarget.appTheme;
+        const { tilecode, python, chooseLanguageRestrictionOnNewProject } = pxt.appTarget.appTheme;
 
         const actions: sui.ModalButton[] = [
             {
@@ -1411,7 +1411,7 @@ export class NewProjectDialog extends data.Component<ISettingsProps, NewProjectD
                 value: pxt.editor.LanguageRestriction.JavaScriptOnly,
                 display: lf("{0} Only", "JavaScript")
             },
-            {
+            tilecode && {
                 value: pxt.editor.LanguageRestriction.TileCodeOnly,
                 display: lf("{0} Only", "TileCode")
             }

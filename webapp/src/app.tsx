@@ -425,7 +425,7 @@ export class ProjectView
 
     isTileCodeActive(): boolean {
         return !this.state.embedSimView && this.editor == this.textEditor
-            && this.editorFile && this.editorFile.name == "main.tc";
+            && this.editorFile && this.editorFile.name == pxt.TILECODE_FILE;
     }
 
     isAssetsActive(): boolean {
@@ -2272,7 +2272,7 @@ export class ProjectView
             if (!files["main.py"]) files["main.py"] = "\n";
         }
         // ensure a main.tc is ready if this is the desired project
-        if (cfg.preferredEditor == pxt.PYTHON_PROJECT_NAME
+        if (cfg.preferredEditor == pxt.TILECODE_PROJECT_NAME
             && cfg.files.indexOf("main.tc") < 0) {
             cfg.files.push("main.tc");
             if (!files["main.tc"]) files["main.tc"] = "\n";

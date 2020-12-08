@@ -380,7 +380,7 @@ class TileCodeMenuItem extends data.Component<ISettingsProps, {}> {
     }
 
     renderCore() {
-        return <BaseMenuItemProps className="tilecode-menuitem" icon="xicon tilecode" text="TileCode" title={lf("TileCode")} onClick={this.onClick} isActive={this.isActive} parent={this.props.parent} />
+        return <BaseMenuItemProps className="tilecode-menuitem" icon="xicon tilecode" text="TileCode" title={lf("View TileCode program")} onClick={this.onClick} isActive={this.isActive} parent={this.props.parent} />
     }
 }
 
@@ -447,6 +447,7 @@ class AssetMenuItem extends data.Component<ISettingsProps, {}> {
 }
 interface IEditorSelectorProps extends ISettingsProps {
     python?: boolean;
+    tilecode?: boolean;
     sandbox?: boolean;
     headless?: boolean;
     languageRestriction?: pxt.editor.LanguageRestriction;
@@ -458,7 +459,7 @@ export class EditorSelector extends data.Component<IEditorSelectorProps, {}> {
     }
 
     renderCore() {
-        const { python, sandbox, headless, languageRestriction, parent } = this.props;
+        const { tilecode, python, sandbox, headless, languageRestriction, parent } = this.props;
         const dropdownActive = python && (parent.isJavaScriptActive() || parent.isPythonActive());
         const tsOnly = languageRestriction === pxt.editor.LanguageRestriction.JavaScriptOnly;
         const pyOnly = languageRestriction === pxt.editor.LanguageRestriction.PythonOnly;
@@ -466,7 +467,7 @@ export class EditorSelector extends data.Component<IEditorSelectorProps, {}> {
 
         // show python in toggle if: python editor currently active, or blocks editor active & saved language pref is python
         const showPython = python && !tsOnly && (parent.isPythonActive() || pxt.shell.isPyLangPref());
-        const showTileCode = tcOnly && (parent.isTileCodeActive());
+        const showTileCode = tilecode && tcOnly && (parent.isTileCodeActive());
         const showBlocks = !pyOnly && !tsOnly && !!pkg.mainEditorPkg().files["main.blocks"];
         const showSandbox = sandbox && !headless;
         const showDropdown = !pyOnly && !tsOnly && python;
@@ -592,7 +593,7 @@ export class MainMenu extends data.Component<ISettingsProps, {}> {
         const tcOnly = !inAltEditor && !showAssets && languageRestriction === pxt.editor.LanguageRestriction.TileCodeOnly;
         const showToggle = !inAltEditor && !targetTheme.blocksOnly
             && (sandbox || !(tsOnly || pyOnly || tcOnly)); // show if sandbox or not single language
-        const editor = 
+        const editor =
             this.props.parent.isTileCodeActive() ? "TileCode" :
                 this.props.parent.isPythonActive() ? "Python" : 
                     (this.props.parent.isJavaScriptActive() ? "JavaScript" : "Blocks");

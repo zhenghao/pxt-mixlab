@@ -315,6 +315,7 @@ declare namespace pxt {
         hideEmbedEdit?: boolean; // hide the edit button in the embedded view
         blocksOnly?: boolean; // blocks only workspace
         python?: boolean; // enable Python?
+        tilecode?: boolean; // enable TileCode?
         hideDocsSimulator?: boolean; // do not show simulator button in docs
         hideDocsEdit?: boolean; // do not show edit button in docs
         hideMenuBar?: boolean; // Hides the main menu bar
