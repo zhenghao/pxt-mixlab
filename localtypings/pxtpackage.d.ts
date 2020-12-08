@@ -1,7 +1,7 @@
 declare namespace pxt {
 
     type CodeCardType = "file" | "example" | "codeExample" | "tutorial" | "side" | "template" | "package" | "hw" | "forumUrl" | "forumExample" | "sharedExample";
-    type CodeCardEditorType = "blocks" | "js" | "py";
+    type CodeCardEditorType = "blocks" | "js" | "py" | "tc";
 
     interface Map<T> {
         [index: string]: T;

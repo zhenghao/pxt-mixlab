@@ -954,6 +954,8 @@ export class ProjectsDetail extends data.Component<ProjectsDetailProps, Projects
 
     protected getActionTitle(editor: pxt.CodeCardEditorType): string {
         switch (editor) {
+            case "tc":
+                return "TileCode";
             case "py":
                 return "Python";
             case "js":

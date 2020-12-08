@@ -380,7 +380,7 @@ class TileCodeMenuItem extends data.Component<ISettingsProps, {}> {
     }
 
     renderCore() {
-        return <BaseMenuItemProps className="tilecode-menuitem" icon="xicon tilecode" text="TileCode" title={lf("View TileCode program")} onClick={this.onClick} isActive={this.isActive} parent={this.props.parent} />
+        return <BaseMenuItemProps className="python-menuitem" icon="square" text="TileCode" title={lf("View TileCode program")} onClick={this.onClick} isActive={this.isActive} parent={this.props.parent} />
     }
 }
 
@@ -624,6 +624,7 @@ export class MainMenu extends data.Component<ISettingsProps, {}> {
             {debugging && !inTutorial ? <sui.MenuItem className="debugger-menu-item centered" icon="large bug" name="Debug Mode" /> : undefined}
             {tsOnly && !sandbox && <sui.MenuItem className="centered" icon="xicon js" name="JavaScript" />}
             {pyOnly && !sandbox && <sui.MenuItem className="centered" icon="xicon python" name="Python" />}
+            {tcOnly && !sandbox && <sui.MenuItem className="centered" icon="icon th" name="TileCode" />}
             <div className="right menu">
                 {debugging ? <sui.ButtonMenuItem className="exit-debugmode-btn" role="menuitem" icon="external" text={lf("Exit Debug Mode")} textClass="landscape only" onClick={this.toggleDebug} /> : undefined}
                 {docMenu ? <container.DocsMenu parent={this.props.parent} editor={editor} /> : undefined}
