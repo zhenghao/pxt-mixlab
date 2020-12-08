@@ -502,6 +502,7 @@ namespace pxt {
     export const JAVASCRIPT_PROJECT_NAME = "tsprj";
     export const PYTHON_PROJECT_NAME = "pyprj";
     export const TILECODE_PROJECT_NAME = "tcprj";
+    export const TILECODE_FILE = "main.tc";
     export const DEFAULT_GROUP_NAME = "other"; // used in flyout, for snippet groups
     export const TILEMAP_CODE = "tilemap.g.ts";
     export const TILEMAP_JRES = "tilemap.g.jres";

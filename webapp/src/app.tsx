@@ -543,7 +543,14 @@ export class ProjectView
     }
 
     openTileCode() {
-        // TODO
+        const mainEditorPkg = pkg.mainEditorPkg()
+        if (!mainEditorPkg) return;
+
+        // create assets.json if it does not exist
+        if (!mainEditorPkg.lookupFile("this/" + pxt.TILECODE_FILE)) {
+            mainEditorPkg.setFile(pxt.TILECODE_FILE, "\n", true);
+        }
+        this.saveFileAsync().then(() => this.setFile(pkg.mainEditorPkg().lookupFile(`this/${pxt.TILECODE_FILE}`)));
     }
 
     openSettings() {
@@ -606,12 +613,6 @@ export class ProjectView
 
     openTypeScriptAsync(): Promise<void> {
         return this.saveTypeScriptAsync(true);
-    }
-
-    openTileCodeAsync(): Promise<void> {
-        const tcSrcFile = pkg.mainEditorPkg().files["main.tc"];
-        // TODO
-        return Promise.resolve();
     }
 
     openPythonAsync(): Promise<void> {

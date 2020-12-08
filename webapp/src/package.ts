@@ -70,6 +70,8 @@ export class File implements pxt.editor.IFile {
                 return basename + ".ts";
             case pxt.PYTHON_PROJECT_NAME:
                 return basename + ".py";
+            case pxt.TILECODE_PROJECT_NAME:
+                return basename + ".tc";
             default:
                 pxt.U.oops();
                 return undefined;

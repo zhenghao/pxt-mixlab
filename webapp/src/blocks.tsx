@@ -1013,7 +1013,7 @@ export class Editor extends toolboxeditor.ToolboxEditor {
     openTileCode() {
         pxt.tickEvent("blocks.showtilecode");
         this.parent.closeFlyout();
-        this.parent.openTileCodeAsync().done();
+        this.parent.openTileCode();
     }
 
     private cleanUpShadowBlocks() {
