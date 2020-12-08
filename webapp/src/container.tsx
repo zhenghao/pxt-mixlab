@@ -459,7 +459,7 @@ export class EditorSelector extends data.Component<IEditorSelectorProps, {}> {
     }
 
     renderCore() {
-        const { tilecode, python, sandbox, headless, languageRestriction, parent } = this.props;
+        const { python, sandbox, headless, languageRestriction, parent } = this.props;
         const dropdownActive = python && (parent.isJavaScriptActive() || parent.isPythonActive());
         const tsOnly = languageRestriction === pxt.editor.LanguageRestriction.JavaScriptOnly;
         const pyOnly = languageRestriction === pxt.editor.LanguageRestriction.PythonOnly;
@@ -467,7 +467,6 @@ export class EditorSelector extends data.Component<IEditorSelectorProps, {}> {
 
         // show python in toggle if: python editor currently active, or blocks editor active & saved language pref is python
         const showPython = python && !tsOnly && (parent.isPythonActive() || pxt.shell.isPyLangPref());
-        const showTileCode = tilecode && tcOnly && (parent.isTileCodeActive());
         const showBlocks = !pyOnly && !tsOnly && !!pkg.mainEditorPkg().files["main.blocks"];
         const showSandbox = sandbox && !headless;
         const showDropdown = !pyOnly && !tsOnly && python;
@@ -477,9 +476,9 @@ export class EditorSelector extends data.Component<IEditorSelectorProps, {}> {
             <div id="editortoggle" className={`ui grid padded ${(pyOnly || tsOnly) ? "one-language" : ""}`}>
                 {showSandbox && <SandboxMenuItem parent={parent} />}
                 {showBlocks && <BlocksMenuItem parent={parent} />}
-                {showTileCode && <TileCodeMenuItem parent={parent} />}
-                {showPython ? <PythonMenuItem parent={parent} /> : <JavascriptMenuItem parent={parent} />}
-                {showDropdown && <sui.DropdownMenu id="editordropdown" role="menuitem" icon="chevron down" rightIcon title={lf("Select code editor language")} className={`item button attached right ${dropdownActive ? "active" : ""}`}>
+                {tcOnly && <TileCodeMenuItem parent={parent} />}
+                {!tcOnly && (showPython ? <PythonMenuItem parent={parent} /> : <JavascriptMenuItem parent={parent} />)}
+                {!tcOnly && showDropdown && <sui.DropdownMenu id="editordropdown" role="menuitem" icon="chevron down" rightIcon title={lf("Select code editor language")} className={`item button attached right ${dropdownActive ? "active" : ""}`}>
                     <JavascriptMenuItem parent={parent} />
                     <PythonMenuItem parent={parent} />
                 </sui.DropdownMenu>}
