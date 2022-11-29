@@ -2377,16 +2377,19 @@ async function buildTargetCoreAsync(options: BuildTargetOptions = {}) {
                 .map(dep => path.resolve(dep).replace(/---.*/, "")); // keep path format (/ vs \\) consistent, trim --- suffix to avoid duplicate imports.
             const config = nodeutil.readPkgConfig(dirname);
             const host = pkg.host() as Host;
-
-            const pkgsToBuildWith = packageDirs.filter(dirname => !allDeps.some(el => el.indexOf(dirname.replace(/---.*/, "")) !== -1));
+            
+            //added by zhenghao
+            let corePkgs = ['ht2210cp001', 'esp32-s2-saola-1']
+            const pkgsToBuildWith = packageDirs.filter(dirname => !allDeps.some(el => el.indexOf(dirname.replace(/---.*/, "")) !== -1)).filter(dirname => corePkgs.indexOf(path.basename(dirname)) == -1)
 
             pxt.log(`Dependencies of pkg: ${allDeps}`);
             pxt.log(`Attemping to bundle necessary hexfiles to compile with: ${pkgsToBuildWith}`);
             for (const extraPackage of pkgsToBuildWith) {
                 process.chdir(path.join(rootDir, dirname));
+                let extra_id = path.basename(extraPackage)
                 const deps: pxt.Map<string> = {
                     ...config.dependencies,
-                    extra: "file:" + path.relative(path.resolve("."), extraPackage)
+                    [extra_id.replace(/---.*/, "")]: "file:" + path.relative(path.resolve("."), extraPackage)
                 }
                 host.fileOverrides["pxt.json"] = JSON.stringify({
                     ...config,
