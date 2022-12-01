@@ -671,6 +671,7 @@ namespace ts.pxtc {
 
 
     export let apiLocalizationStrings: pxt.Map<string> = {};
+    export let editorLocalizationStrings: pxt.Map<string> = {};
 
     export async function localizeApisAsync(apis: pxtc.ApisInfo, mainPkg: pxt.MainPackage): Promise<pxtc.ApisInfo> {
         const lang = pxtc.Util.userLanguage();
@@ -683,8 +684,16 @@ namespace ts.pxtc {
         const attrBlockLocsKey = langLower + "|block";
 
         const loc = await mainPkg.localizationStringsAsync(lang);
-        if (apiLocalizationStrings)
-            Util.jsonMergeFrom(loc, apiLocalizationStrings);
+        if (apiLocalizationStrings) {
+            Util.jsonMergeFrom(loc, apiLocalizationStrings);            
+        }
+        
+        if(editorLocalizationStrings)
+        {
+            Util.jsonMergeFrom(loc, editorLocalizationStrings);
+        }
+
+        Util.setLocalizedStrings(loc)
 
         const toLocalize = Util.values(apis.byQName).filter(fn => fn.attributes._translatedLanguageCode !== lang);
         await Util.promiseMapAll(toLocalize, async fn => {
