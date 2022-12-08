@@ -1013,9 +1013,9 @@ function uploadCoreAsync(opts: UploadOptions) {
             "pxtVersion": pxtVersion(),
             "pxtRelId": "localDirRelId",
             "pxtCdnUrl": opts.localDir,
-            "commitCdnUrl": opts.localDir,
+            "commitCdnUrl": "https://hilab.oss-cn-hangzhou.aliyuncs.com/", //opts.localDir,
             "blobCdnUrl": opts.localDir,
-            "cdnUrl": opts.localDir,
+            "cdnUrl": "http://8.136.140.69:8081", //opts.localDir,
             "targetVersion": opts.pkgversion,
             "targetRelId": "",
             "targetUrl": "",
@@ -1030,7 +1030,7 @@ function uploadCoreAsync(opts: UploadOptions) {
             "asseteditorUrl": opts.localDir + "asseteditor.html",
             "skillmapUrl": opts.localDir + "skillmap.html",
             "authcodeUrl": opts.localDir + "authcode.html",
-            "isStatic": true,
+            "isStatic": false,
         }
         const targetImagePaths = targetImages.map(k =>
             `${opts.localDir}${path.join('./docs', logos[k])}`);

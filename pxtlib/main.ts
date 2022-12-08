@@ -421,7 +421,7 @@ namespace pxt {
 
     export function getOnlineCdnUrl(): string {
         if (!webConfig) return null
-        let m = /^(https:\/\/[^\/]+)/.exec(webConfig.commitCdnUrl)
+        let m = /^(http(s)?:\/\/[^\/]+)/.exec(webConfig.commitCdnUrl)
         if (m) return m[1]
         else return null
     }
