@@ -63,13 +63,13 @@ export function showAboutDialogAsync(projectView: pxt.editor.IProjectView) {
                                 : <p>{lf("{0} is up to date", pxt.appTarget.title)}</p>
                         : undefined}
                     {githubUrl && versions && renderVersionLink(pxt.appTarget.name, versions.target, `${githubUrl}/releases/tag/v${versions.target}`)}
-                    {versions && renderVersionLink("Microsoft MakeCode", versions.pxt, `https://github.com/Microsoft/pxt/releases/tag/v${versions.pxt}`)}
+                    {/* {versions && renderVersionLink("Microsoft MakeCode", versions.pxt, `https://github.com/Microsoft/pxt/releases/tag/v${versions.pxt}`)}
                     {compileVariantInfos?.length ? compileVariantInfos.map(info => <div key={info.variantName}>{renderCompileLink(info.variantName, info.compileService)}</div>) : undefined}
                     <p><br /></p>
                     <p>
                         {targetTheme.termsOfUseUrl ? <a target="_blank" className="item" href={targetTheme.termsOfUseUrl} rel="noopener noreferrer">{lf("Terms of Use")}</a> : undefined}
                         &nbsp;&nbsp;&nbsp; {targetTheme.privacyUrl ? <a target="_blank" className="item" href={targetTheme.privacyUrl} rel="noopener noreferrer">{lf("Privacy")}</a> : undefined}
-                    </p>
+                    </p> */}
                     {targetTheme.copyrightText ? <p> {targetTheme.copyrightText} </p> : undefined}
                 </div>
             })
