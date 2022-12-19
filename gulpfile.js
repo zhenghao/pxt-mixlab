@@ -243,6 +243,7 @@ function updatestrings() {
         "pxtpy",
         "pxtsim",
         "webapp/src",
+        "react-common"
     ], true);
 }
 
@@ -264,7 +265,7 @@ function buildStrings(out, rootPaths, recursive) {
         if (!/\.(ts|tsx|html)$/.test(filename)) return
         if (/\.d\.ts$/.test(filename)) return
 
-        // console.log(`extracting strings from ${filename}`);
+        console.log(`extracting strings from ${filename}`);
         fs.readFileSync(filename, "utf8").split('\n').forEach((line, idx) => {
             function err(msg) {
                 console.log("%s(%d): %s", filename, idx + 1, msg);
