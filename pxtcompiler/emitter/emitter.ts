@@ -1626,16 +1626,17 @@ namespace ts.pxtc {
             let w = 0;
             let h = 0;
             let lit = "";
+            let lit_esp32 ="";
             let c = 0;
             s += "\n"
             for (let i = 0; i < s.length; ++i) {
                 switch (s[i]) {
                     case ".":
                     case "_":
-                    case "0": lit += "0,"; x++; c++; break;
+                    case "0": lit += "0,"; lit_esp32 += "00";x++; c++; break;
                     case "#":
                     case "*":
-                    case "1": lit += "255,"; x++; c++; break;
+                    case "1": lit += "255,"; lit_esp32 += "FF"; x++; c++; break;
                     case "\t":
                     case "\r":
                     case " ": break;
@@ -1660,6 +1661,11 @@ namespace ts.pxtc {
             if (c % 2 != 0)
                 lit += "0"
 
+            // this is for esp32 vm
+            lit_esp32 = w.toString(16).padStart(2, '0') + h.toString(16).padStart(2, '0') + lit_esp32;
+            bin.hexlits[lbl] = lit_esp32;
+            //console.log(`>>>>>>>>>>>>>>>>>>>>>>>${lbl} ${lit_esp32}`)
+            
             // this is codal's format!
             bin.otherLiterals.push(`
 .balign 4

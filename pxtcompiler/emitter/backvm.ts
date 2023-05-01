@@ -286,9 +286,9 @@ _start_${name}:
         vmsource += "_vtables_end:\n\n"
 
         U.iterMap(bin.hexlits, (k, v) => {
-            section(v, SectionType.Literal, () =>
+            section(k, SectionType.Literal, () =>
                 `.word ${vtRef("pxt::buffer_vt")}\n` +
-                hexLiteralAsm(k), [], pxt.BuiltInType.BoxedBuffer)
+                hexLiteralAsm(v), [], pxt.BuiltInType.BoxedBuffer)
         })
 
         // ifaceMembers are already sorted alphabetically
@@ -339,6 +339,7 @@ _start_${name}:
         vmsource += "_img_end:\n"
         vmsource += "\n; The end.\n"
         bin.writeFile(BINARY_ASM, vmsource)
+        //console.log(vmsource);
 
         let res = assemble(opts.target, bin, vmsource)
 
