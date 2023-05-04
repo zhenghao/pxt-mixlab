@@ -286,6 +286,12 @@ _start_${name}:
         vmsource += "_vtables_end:\n\n"
 
         U.iterMap(bin.hexlits, (k, v) => {
+            section(v, SectionType.Literal, () =>
+                `.word ${vtRef("pxt::buffer_vt")}\n` +
+                hexLiteralAsm(k), [], pxt.BuiltInType.BoxedBuffer)
+        })
+
+        U.iterMap(bin.hexlits_img, (k, v) => {
             section(k, SectionType.Literal, () =>
                 `.word ${vtRef("pxt::buffer_vt")}\n` +
                 hexLiteralAsm(v), [], pxt.BuiltInType.BoxedBuffer)

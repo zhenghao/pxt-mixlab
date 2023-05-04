@@ -1663,7 +1663,7 @@ namespace ts.pxtc {
 
             // this is for esp32 vm
             lit_esp32 = w.toString(16).padStart(2, '0') + h.toString(16).padStart(2, '0') + lit_esp32;
-            bin.hexlits[lbl] = lit_esp32;
+            bin.hexlits_img[lbl] = lit_esp32;
             //console.log(`>>>>>>>>>>>>>>>>>>>>>>>${lbl} ${lit_esp32}`)
             
             // this is codal's format!
@@ -5017,6 +5017,7 @@ ${lbl}: .short 0xffff
         ifaceMembers: string[];
         strings: pxt.Map<string> = {};
         hexlits: pxt.Map<string> = {};
+        hexlits_img: pxt.Map<string> = {};
         doubles: pxt.Map<string> = {};
         otherLiterals: string[] = [];
         codeHelpers: pxt.Map<string> = {};
