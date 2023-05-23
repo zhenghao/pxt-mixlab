@@ -1025,7 +1025,12 @@ namespace pxt.cpp {
             res.generatedFiles[sourcePath + "CMakeLists.txt"] =
                 `idf_component_register(\n  SRCS\n` +
                 files.map(f => `    "${f}"\n`).join("") +
-                `  INCLUDE_DIRS\n    "."\n)\n`
+                `  INCLUDE_DIRS\n    "."\n` + 
+                `  PRIV_INCLUDE_DIRS "/Users/zhenghao/Work/PSDLab/ESP/esp-idf/components/usb/private_include"\n` + 
+                `  REQUIRES usb driver esp_timer mbedtls touch_element esp_wifi nvs_flash mqtt esp_http_server mdns\n` +
+                `  )\n`            
+            res.generatedFiles[sourcePath + "idf_component.yml"] =
+                `## IDF Component Manager Manifest File\ndependencies:\n  espressif/esp_tinyusb: "^1"\n  idf: "^5.0"`
         } else if (isCodal) {
             let cs = compileService
             let cfg = U.clone(cs.codalDefinitions) || {}
