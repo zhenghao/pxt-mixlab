@@ -1027,10 +1027,10 @@ namespace pxt.cpp {
                 files.map(f => `    "${f}"\n`).join("") +
                 `  INCLUDE_DIRS\n    "."\n` + 
                 `  PRIV_INCLUDE_DIRS "/Users/zhenghao/Work/PSDLab/ESP/esp-idf/components/usb/private_include"\n` + 
-                `  REQUIRES usb driver esp_timer mbedtls touch_element esp_wifi nvs_flash mqtt esp_http_server mdns\n` +
+                `  REQUIRES usb driver esp_timer mbedtls touch_element esp_wifi nvs_flash mqtt esp_http_server mdns esp_websocket_client json unity\n` +
                 `  )\n`            
             res.generatedFiles[sourcePath + "idf_component.yml"] =
-                `## IDF Component Manager Manifest File\ndependencies:\n  espressif/esp_tinyusb: "^1"\n  idf: "^5.0"`
+                `## IDF Component Manager Manifest File\ndependencies:\n  espressif/esp_tinyusb: "^1"\n  espressif/button:\n    version: "~2.5.0"\n  idf: "^5.0"`
         } else if (isCodal) {
             let cs = compileService
             let cfg = U.clone(cs.codalDefinitions) || {}

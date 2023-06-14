@@ -1015,7 +1015,7 @@ function uploadCoreAsync(opts: UploadOptions) {
             "pxtCdnUrl": opts.localDir,
             "commitCdnUrl": "https://hilab.oss-cn-hangzhou.aliyuncs.com/", //opts.localDir,
             "blobCdnUrl": opts.localDir,
-            "cdnUrl": "http://8.136.140.69:8081", //opts.localDir,
+            "cdnUrl": "http://111.231.6.111:8081", //opts.localDir,
             "targetVersion": opts.pkgversion,
             "targetRelId": "",
             "targetUrl": "",
@@ -2379,7 +2379,7 @@ async function buildTargetCoreAsync(options: BuildTargetOptions = {}) {
             const host = pkg.host() as Host;
             
             //added by zhenghao
-            let corePkgs = ['ht2210cp001', 'esp32-s2-saola-1']
+            let corePkgs = ['ht2210cp001', 'esp32-s2-saola-1', 't2clock']
             const pkgsToBuildWith = packageDirs.filter(dirname => !allDeps.some(el => el.indexOf(dirname.replace(/---.*/, "")) !== -1)).filter(dirname => corePkgs.indexOf(path.basename(dirname)) == -1)
 
             pxt.log(`Dependencies of pkg: ${allDeps}`);

@@ -503,7 +503,7 @@ class HeroBanner extends data.Component<ISettingsProps, HeroBannerState> {
         const description = card.description || card.name;
         const encodedBkgd = `url(${encodeURI(card.largeImageUrl || card.imageUrl)})`;
 
-        const label = card.buttonLabel || codeCardButtonLabel(card.cardType, card.youTubeId, card.youTubePlaylistId);
+        const label = card.buttonLabel || codeCardButtonLabel(card.cardType, card.youTubeId, card.youTubePlaylistId, url);
         const hasAction = !!url || !!card.youTubeId || !!card.youTubePlaylistId;
 
         return <div className="ui segment getting-started-segment hero"
@@ -898,7 +898,7 @@ export class ProjectsDetail extends data.Component<ProjectsDetailProps, Projects
 
     protected getClickLabel(cardType: string) {
         const { youTubeId, youTubePlaylistId } = this.props;
-        return codeCardButtonLabel(cardType, youTubeId, youTubePlaylistId);
+        return codeCardButtonLabel(cardType, youTubeId, youTubePlaylistId, this.getUrl());
     }
 
     protected getActionEditor(type: string, action?: pxt.CodeCardAction): pxt.CodeCardEditorType {
@@ -1037,7 +1037,8 @@ export class ProjectsDetail extends data.Component<ProjectsDetailProps, Projects
         const image = !highContrast && (largeImageUrl || (youTubeId && `https://img.youtube.com/vi/${youTubeId}/0.jpg`));
         const video = !highContrast && !pxt.BrowserUtils.isElectron() && !pxt.BrowserUtils.isIOS() && videoUrl;
         const showVideoOrImage = !pxt.appTarget.appTheme.hideHomeDetailsVideo;
-        const youTubeWatchUrl = pxt.youtube.watchUrl(youTubeId, youTubePlaylistId)
+        const youTubeWatchUrl = youTubeId && `https://www.bilibili.com/video/${youTubeId}`
+        //pxt.youtube.watchUrl(youTubeId, youTubePlaylistId)
 
         let clickLabel: string;
         if (buttonLabel)
@@ -1095,7 +1096,7 @@ export class ProjectsDetail extends data.Component<ProjectsDetailProps, Projects
     }
 }
 
-function codeCardButtonLabel(cardType: string, youTubeId?: string, youTubePlaylistId?: string) {
+function codeCardButtonLabel(cardType: string, youTubeId?: string, youTubePlaylistId?: string, url?: string) {
     if (cardType == "tutorial")
         return lf("Start Tutorial");
     else if (cardType == "codeExample" || cardType == "example")
@@ -1110,6 +1111,8 @@ function codeCardButtonLabel(cardType: string, youTubeId?: string, youTubePlayli
         return lf("Watch Video");
     else if (youTubePlaylistId)
         return lf("Watch Playlist");
+    else if(url && url.includes("bilibili.com"))
+        return lf("Watch Video");
     return lf("Show Instructions");
 }
 
