@@ -243,14 +243,14 @@ export class ShareEditor extends auth.Component<ShareEditorProps, ShareEditorSta
 
         let shareUrl = (persistent
             ? targetTheme.homeUrl
-            : targetTheme.shareUrl) || "https://makecode.com/";
+            : targetTheme.shareUrl) || "http://makecode.ihilab.com/";
         if (!/\/$/.test(shareUrl)) shareUrl += '/';
         let rootUrl = targetTheme.embedUrl
         if (!/\/$/.test(rootUrl)) rootUrl += '/';
         const verPrefix = pxt.webConfig.verprefix || '';
 
         if (header) {
-            shareData.url = `${shareUrl}${pubId}`;
+            shareData.url = `${shareUrl}#pub:${pubId}`;
             shareData.embed.code = pxt.docs.codeEmbedUrl(`${rootUrl}${verPrefix}`, pubId);
             shareData.embed.editor = pxt.docs.embedUrl(`${rootUrl}${verPrefix}`, "pub", pubId);
             shareData.embed.url = `${rootUrl}${verPrefix}#pub:${pubId}`;
@@ -273,7 +273,7 @@ export class ShareEditor extends auth.Component<ShareEditorProps, ShareEditorSta
         }
 
         if (targetTheme.qrCode) {
-            shareData.qr = await qr.renderAsync(`${shareUrl}${pubId}`);
+            shareData.qr = await qr.renderAsync(`${shareUrl}#pub:${pubId}`);
         }
 
         return shareData;
