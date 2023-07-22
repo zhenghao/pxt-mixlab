@@ -227,14 +227,14 @@ export const ShareInfo = (props: ShareInfoProps) => {
                                 title={lf("Show embed code")}
                                 leftIcon="fas fa-code"
                                 onClick={handleEmbedClick} />
-                            <SocialButton className="circle-button facebook"
+                            {/* <SocialButton className="circle-button facebook"
                                 url={shareData?.url}
                                 type='facebook'
                                 heading={lf("Share on Facebook")} />
                             <SocialButton className="circle-button twitter"
                                 url={shareData?.url}
                                 type='twitter'
-                                heading={lf("Share on Twitter")} />
+                                heading={lf("Share on Twitter")} /> */}
                             {navigator.share && <Button className="circle-button device-share"
                                 title={lf("Show device share options")}
                                 ariaLabel={lf("Show device share options")}
