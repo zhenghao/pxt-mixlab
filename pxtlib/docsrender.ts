@@ -76,7 +76,7 @@ namespace pxt.docs {
             cmd: "### @vimeo $1"
         },
         {
-            rx: /^(www\.youtube\.com\/watch\?v=|youtu\.be\/)([\w\-]+(\#t=([0-9]+m[0-9]+s|[0-9]+m|[0-9]+s))?)/i,
+            rx: /^(www\.youtube\.com\/watch\?v=|youtu\.be\/|bilibili\.com\/video\/)([\w\-]+(\#t=([0-9]+m[0-9]+s|[0-9]+m|[0-9]+s))?)/i,
             cmd: "### @youtube $2"
         }
     ]
@@ -302,7 +302,7 @@ namespace pxt.docs {
         params["targetid"] = theme.id || "???";
         params["targetname"] = theme.name || "Microsoft MakeCode";
         params["docsheader"] = theme.docsHeader || "Documentation";
-        params["orgtitle"] = "MakeCode";
+        params["orgtitle"] = "HiLab";
 
         const docsLogo = theme.docsLogo && U.htmlEscape(theme.docsLogo);
         const orgLogo = (theme.organizationWideLogo || theme.organizationLogo) && U.htmlEscape(theme.organizationWideLogo || theme.organizationLogo);
@@ -614,6 +614,7 @@ ${opts.repo.name.replace(/^pxt-/, '')}=github:${opts.repo.fullName}#${opts.repo.
         // support for breaks which somehow don't work out of the box
         html = html.replace(/&lt;br\s*\/&gt;/ig, "<br/>");
 
+        
         // github will render images if referenced as ![](/docs/static/foo.png)
         // we require /static/foo.png
         html = html.replace(/(<img [^>]* src=")\/docs\/static\/([^">]+)"/g,
@@ -761,7 +762,7 @@ ${opts.repo.name.replace(/^pxt-/, '')}=github:${opts.repo.fullName}#${opts.repo.
     export function embedUrl(rootUrl: string, tag: string, id: string, height?: number): string {
         const url = `${rootUrl}#${tag}:${id}`;
         let padding = '70%';
-        return `<div style="position:relative;height:0;padding-bottom:${padding};overflow:hidden;"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="${url}" frameborder="0" sandbox="allow-popups allow-forms allow-scripts allow-same-origin"></iframe></div>`;
+        return `<div style="position:relative;height:0;padding-bottom:${padding};overflow:hidden;"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="${url}" frameborder="0" sandbox="allow-popups allow-forms allow-scripts allow-same-origin allow-downloads"></iframe></div>`;
     }
 
     export function runUrl(url: string, padding: string, id: string): string {
