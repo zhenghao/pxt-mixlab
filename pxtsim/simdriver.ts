@@ -887,7 +887,7 @@ namespace pxsim {
                     const brk = msg as pxsim.DebuggerBreakpointMessage
                     if (this.state == SimulatorState.Running) {
                         if (brk.exceptionMessage) {
-                            this.suspend();
+                            //this.suspend();
                         }
                         else {
                             this.setState(SimulatorState.Paused);
@@ -898,8 +898,8 @@ namespace pxsim {
                             }
                         }
 
-                        if (this.options.onDebuggerBreakpoint)
-                            this.options.onDebuggerBreakpoint(brk);
+                        //if (this.options.onDebuggerBreakpoint)
+                        //    this.options.onDebuggerBreakpoint(brk);
                         let stackTrace = brk.exceptionMessage + "\n"
                         for (let s of brk.stackframes) {
                             let fi = s.funcInfo
