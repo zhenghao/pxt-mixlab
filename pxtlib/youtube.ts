@@ -104,12 +104,15 @@ namespace pxt.youtube {
 
     export function watchUrl(videoId?: string, playlistId?: string) {
         let url: string = undefined;
+        // if (videoId) {
+        //     url = `https://www.youtube.com/watch?v=${videoId}`;
+        //     if (playlistId)
+        //         url += `&list=${playlistId}`;
+        // } else if (playlistId) {
+        //     url = `https://www.youtube.com/playlist?list=${playlistId}`;
+        // }
         if (videoId) {
-            url = `https://www.youtube.com/watch?v=${videoId}`;
-            if (playlistId)
-                url += `&list=${playlistId}`;
-        } else if (playlistId) {
-            url = `https://www.youtube.com/playlist?list=${playlistId}`;
+            url = `https://www.bilibili.com/video/${videoId}`;
         }
         return url;
     }
