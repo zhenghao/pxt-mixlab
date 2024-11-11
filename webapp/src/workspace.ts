@@ -731,23 +731,31 @@ export async function getPublishedScriptAsync(id: string) {
     const eid = encodeURIComponent(pxt.github.upgradedPackageId(config, id))
     return await scriptDlQ.enqueue(eid, async () => {
         let files: ScriptText
+        files = await (Cloud.downloadScriptFilesAsync(id).catch(core.handleNetworkError))
         try {
-            files = (await scripts.getAsync(eid)).files
-        } catch {
-            if (pxt.github.isGithubId(id)) {
-                files = (await pxt.github.downloadPackageAsync(id, config)).files
-            } else {
-                files = await (Cloud.downloadScriptFilesAsync(id)
-                    .catch(core.handleNetworkError))
-            }
-            try {
                 await scripts.setAsync({ id: eid, files: files })
-            }
-            catch (e) {
+        }
+        catch (e) {
                 // Don't fail if the indexeddb fails, but log it
                 pxt.log("Unable to cache script in DB");
-            }
         }
+        // try {
+        //     files = (await scripts.getAsync(eid)).files
+        // } catch {
+        //     if (pxt.github.isGithubId(id)) {
+        //         files = (await pxt.github.downloadPackageAsync(id, config)).files
+        //     } else {
+        //         files = await (Cloud.downloadScriptFilesAsync(id)
+        //             .catch(core.handleNetworkError))
+        //     }
+        //     try {
+        //         await scripts.setAsync({ id: eid, files: files })
+        //     }
+        //     catch (e) {
+        //         // Don't fail if the indexeddb fails, but log it
+        //         pxt.log("Unable to cache script in DB");
+        //     }
+        // }        
         return fixupFileNames(files)
     })
 }
