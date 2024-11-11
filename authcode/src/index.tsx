@@ -14,7 +14,8 @@ const bundle = (window as any).pxtTargetBundle as pxt.TargetBundle;
 bundle.bundledpkgs = {};
 
 pxt.setAppTarget(bundle);
-pxt.Cloud.apiRoot = "http://111.231.6.111:8081/api/";
+//pxt.Cloud.apiRoot = "http://111.231.6.111:8081/api/";
+pxt.Cloud.apiRoot = "https://makecoode.ihilab.com/api/";
 if (!isLocal()) pxt.setupWebConfig((window as any).pxtConfig);
 
 ReactDOM.render(

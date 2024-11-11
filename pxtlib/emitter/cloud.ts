@@ -2,7 +2,7 @@
 namespace pxt.Cloud {
     import Util = pxtc.Util;
 
-    export let apiRoot = (pxt.BrowserUtils.isLocalHost() || Util.isNodeJS) ? "http://111.231.6.111:8081/api/" : "http://111.231.6.111:8081/api/";
+    export let apiRoot = (pxt.BrowserUtils.isLocalHost() || Util.isNodeJS) ? "https://makecode.ihilab.com/api/" : "https://makecode.ihilab.com/api/";
 
     export let accessToken = "";
     export let localToken = "";

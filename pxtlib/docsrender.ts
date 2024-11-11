@@ -78,6 +78,11 @@ namespace pxt.docs {
         {
             rx: /^(www\.youtube\.com\/watch\?v=|youtu\.be\/|bilibili\.com\/video\/)([\w\-]+(\#t=([0-9]+m[0-9]+s|[0-9]+m|[0-9]+s))?)/i,
             cmd: "### @youtube $2"
+        },
+        {
+            //1318690068.vod-qcloud.com/vod-player/1318690068/3270835010996201092/vod/vod-player-v4.html?autoplay=false&width=848&height=480&psign=&lang=zh-CN" frameborder="0" scrolling="no" width="848" height="480" allowfullscreen>
+            rx: /(.*$)/i,
+            cmd: "### @vodqcloud $1"
         }
     ]
 
@@ -613,8 +618,6 @@ ${opts.repo.name.replace(/^pxt-/, '')}=github:${opts.repo.fullName}#${opts.repo.
 
         // support for breaks which somehow don't work out of the box
         html = html.replace(/&lt;br\s*\/&gt;/ig, "<br/>");
-
-        
         // github will render images if referenced as ![](/docs/static/foo.png)
         // we require /static/foo.png
         html = html.replace(/(<img [^>]* src=")\/docs\/static\/([^">]+)"/g,
