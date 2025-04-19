@@ -79,7 +79,7 @@ namespace pxt.esp {
             ]
         },
         {
-            name: "esp32-s3", chipId: 4,
+            name: "esp32-s3", chipId: 9,
             memmap: [
                 { from: 0x00000000, to: 0x00010000, id: "PADDING" },
                 { from: 0x3C000000, to: 0x3D000000, id: "DROM" },

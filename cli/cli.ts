@@ -2380,8 +2380,9 @@ async function buildTargetCoreAsync(options: BuildTargetOptions = {}) {
             const host = pkg.host() as Host;
             
             //added by zhenghao
-            let corePkgs = ['ht2210cp001', 'esp32-s2-saola-1', 't2clock']
-            const pkgsToBuildWith = packageDirs.filter(dirname => !allDeps.some(el => el.indexOf(dirname.replace(/---.*/, "")) !== -1)).filter(dirname => corePkgs.indexOf(path.basename(dirname)) == -1)
+            //let corePkgs = ['ht2210cp001', 'esp32-s2-saola-1', 't2clock', 't3board']
+            //const pkgsToBuildWith = packageDirs.filter(dirname => !allDeps.some(el => el.indexOf(dirname.replace(/---.*/, "")) !== -1)).filter(dirname => corePkgs.indexOf(path.basename(dirname)) == -1)
+            const pkgsToBuildWith = packageDirs.filter(dirname => !allDeps.some(el => el.indexOf(dirname.replace(/---.*/, "")) !== -1));
 
             pxt.log(`Dependencies of pkg: ${allDeps}`);
             pxt.log(`Attemping to bundle necessary hexfiles to compile with: ${pkgsToBuildWith}`);
@@ -3803,7 +3804,7 @@ function simulatorCoverage(pkgCompileRes: pxtc.CompileResult, pkgOpts: pxtc.Comp
         let simName = pxtc.shimToJs(shim)
         let sym = U.lookup(decls, simName)
         if (!sym) {
-            pxt.log("missing in sim: " + simName)
+            //pxt.log("missing in sim: " + simName)
         }
     }
 
